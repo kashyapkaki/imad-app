@@ -1,0 +1,43 @@
+HHH:System Definition Document;DOC0054820-003-EN-System Definition Document.docx
+PeC:gep9_DocTitle;Title~#~System Definition Document
+PtC:owning_user;Author~#~Dickelé, Julien (503185440)
+PtC:gep9_ShortCustName;CustName~#~Chantiers de L'atlantique
+PtC:gep9_Final_Customer_Name;FinCustName~#~
+PtC:gep9_Direct_Customer_Name;DirCustName~#~
+PtC:gep9_Project_Title;ProjName~#~MSC worldclass W34-X34
+PeC:gep9_DocSubTitle1;OptSubTit1~#~
+PeC:gep9_DocSubTitle2;OptSubTit2~#~
+PeC:gep9_DocSubTitle3;OptSubTit3~#~
+PeC:item_revision_id;Version~#~003
+PeC:gep9_DocIssuedDate$DATE;DocIssuedDate~#~2020-05-20 06:00:00
+PfC:gep9_LatestChange;ReasonForIssue~#~General Update
+PeC:gep9_Doc_Reference;Ref~#~DOC0054820
+PeC:gep9_CustDocRev;CustRev~#~
+PeC:gep9_CustDoc_Ref;CustRef~#~
+PtC:gep9_ProjShort_ID;ContNo~#~C-014248
+PtC:gep9_Short_ID;TendNo~#~
+PtC:gep9_CustOrderNo;CustNo~#~
+PtC:gep9_AdditionalShort_ID;AddNo~#~
+PeC:gep9_Copyright_Year;DocCreateYear~#~2019
+PtC:ip_classification;ProtectiveMarking~#~CLASSE II (GE INTERNE NON CRITIQUE)
+PtC:gep9_DesignAuthority;DesignOffice~#~SY-TE-MAR.GEPC
+PfC:gep9_TemplateHistory;TemplateVersion~#~GE
+PeC:gep9_SW_MajorVersion;SwMajor~#~
+PeC:gep9_SW_MinorVersion;SwMinor~#~
+PeC:gep9_SW_BuildVersion;SwBuild~#~
+PeC:gep9_SW_RevisionVersion;SwRev~#~
+PtC:gep9_ProjFieldDesc1;PSDesc1~#~
+PeC:gep9_ProjField1;PSVal1~#~
+PtC:gep9_ProjFieldDesc2;PSDesc2~#~
+PeC:gep9_ProjField2;PSVal2~#~
+PtC:gep9_ProjFieldDesc3;PSDesc3~#~
+PeC:gep9_ProjField3;PSVal3~#~
+PtC:gep9_ProjFieldDesc4;PSDesc4~#~
+PeC:gep9_ProjField4;PSVal4~#~
+PtC:gep9_Basic_Doc_Type$LOV;BDT~#~P
+PtC:gep9_DocLanguage$LOV;DocLang~#~EN
+PtC:item_id;TCDocId~#~DOC0054820
+PeC:gep9_ReviewDate$DATE;PlanRevDate~#~2000-01-01 08:00:00
+PtC:gep9_LocalCopyOf;LocalCopyOf~#~
+PtC:gep9_Project_Location;Location~#~
+PeC:gep9_SW_Identifier;SwIdent~#~
