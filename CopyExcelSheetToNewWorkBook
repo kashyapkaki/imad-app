@@ -1,0 +1,34 @@
+private static void CreateNewWorkbook()
+{
+    Excel.Application app = null;
+    Excel.Workbook book = null;
+    Excel.Worksheet sheet = null;
+
+    try
+    {
+        string startPath = System.IO.Path.GetDirectoryName("C:/Users/ek097e/Documents/");
+        string filePath = System.IO.Path.Combine(startPath, "2020_India_Holidays_1.xlsx");
+
+        app = new Excel.Application();
+        book = app.Workbooks.Open(filePath);
+        sheet = (Excel.Worksheet)book.Worksheets.Item[1];
+        //Copies sheet and puts the copy into a new workbook
+        sheet.Copy(Type.Missing, Type.Missing);
+
+        //sets the sheet variable to the copied sheet in the new workbook
+        sheet = app.Workbooks[2].Sheets[1];
+
+        sheet.SaveAs("test");
+    }
+    finally
+    {
+        if (book != null)
+        {
+            book.Close();
+        }
+        if (app != null)
+        {
+            app.Quit();
+        }
+    }
+}
