@@ -1,0 +1,49 @@
+using System.Threading;
+using Excel = Microsoft.Office.Interop.Excel;
+
+namespace ConsoleApp1
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            CreateNewWorkbook(args);
+        }
+
+        private static void CreateNewWorkbook(string[] args)
+        {
+            Excel.Application app = null;
+            Excel.Workbook book = null;
+            Excel.Worksheet sheet = null;
+            Excel.Worksheet osheet = null;
+            Excel.Workbook obook = null;
+
+            string startPath = System.IO.Path.GetDirectoryName(args[0].Replace("\"",""));
+            string filePath = System.IO.Path.Combine(startPath, args[1].Replace("\"", ""));
+            string outputPath = System.IO.Path.Combine(startPath, args[2].Replace("\"", ""));
+
+            app = new Excel.Application();
+            book = app.Workbooks.Open(filePath);
+            Thread.Sleep(1000);
+            sheet = (Excel.Worksheet)book.Sheets[book.Sheets.Count];
+
+            obook = app.Workbooks.Open(outputPath);
+            Thread.Sleep(1000);
+            osheet = (Excel.Worksheet)obook.Sheets[obook.Sheets.Count];
+
+            int lastUsedRow = sheet.Cells.Find("*", System.Reflection.Missing.Value,
+                               System.Reflection.Missing.Value, System.Reflection.Missing.Value,
+                               Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlPrevious,
+                               false, System.Reflection.Missing.Value, System.Reflection.Missing.Value).Row;
+
+            Excel.Range from = sheet.Range["A1:B" + lastUsedRow.ToString()];
+            Excel.Range to = osheet.Range["I1:J" + lastUsedRow.ToString()];
+
+            from.Copy(to);
+
+            obook.Close(true);
+            book.Close(true);
+            app.Quit();
+        }
+    }
+}
