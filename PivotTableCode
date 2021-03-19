@@ -1,0 +1,62 @@
+private static void CreateNewWorkbook(string[] args)
+{
+    Excel.Application app = null;
+    Excel.Workbook book = null;
+    Excel.Worksheet sheet = null;
+
+    string filePath = "C:\\Users\\ek097e\\Documents\\GEPC PLM Automated Test Template_W11.xlsx";
+
+    app = new Excel.Application();
+    book = app.Workbooks.Open(filePath);
+    //sheets = (Excel.Worksheet)book.Sheets;
+
+    Excel.Worksheet pivotSheet = (Excel.Worksheet)book.Worksheets.Add(Type.Missing, book.Worksheets[book.Worksheets.Count], 1, XlSheetType.xlWorksheet);
+
+    pivotSheet.Name = "Pivot Table";
+    int increment = 1;
+
+    for (int i = 1; i < book.Sheets.Count - 1; i++)
+    {
+        sheet = book.Sheets[i];
+        int lastUsedRow = sheet.Cells.Find("*", System.Reflection.Missing.Value,
+                       System.Reflection.Missing.Value, System.Reflection.Missing.Value,
+                       Excel.XlSearchOrder.xlByRows, Excel.XlSearchDirection.xlPrevious,
+                       false, System.Reflection.Missing.Value, System.Reflection.Missing.Value).Row;
+
+        //Excel.Range range = sheet.Range["A1:J" + lastUsedRow.ToString()];
+        //Excel.Range range = sheet.Range["A1", "J" + lastUsedRow.ToString()];
+        Excel.Range range = sheet.get_Range("A1", "J" + lastUsedRow.ToString());
+
+        Excel.Range range2 = pivotSheet.Cells[increment, 1];
+
+        Excel.PivotCache pivotCache = (Excel.PivotCache)book.PivotCaches().Create(Excel.XlPivotTableSourceType.xlDatabase, range, XlPivotTableVersionList.xlPivotTableVersion14);
+        Excel.PivotTable pivotTable = (Excel.PivotTable)pivotSheet.PivotTables().Add(PivotCache: pivotCache, TableDestination: range2, TableName: "PivotTable_" + increment);
+
+        pivotTable.ShowTableStyleColumnHeaders = true;
+        pivotTable.ShowTableStyleColumnStripes = true;
+        pivotTable.ShowTableStyleLastColumn = true;
+        pivotTable.ShowTableStyleRowHeaders = true;
+        pivotTable.ShowTableStyleRowStripes = true;
+        pivotTable.TableStyle2 = "PivotStyleMedium9";
+
+        Excel.PivotField pivotField = (Excel.PivotField)pivotTable.PivotFields("Test Status");
+        pivotField.Orientation = Excel.XlPivotFieldOrientation.xlDataField;
+        pivotField.Function = Excel.XlConsolidationFunction.xlCount;
+        pivotField.Name = "Count";
+
+        Excel.PivotField pivotField2 = (Excel.PivotField)pivotTable.PivotFields("Use Case");
+        pivotField2.Orientation = Excel.XlPivotFieldOrientation.xlRowField;
+        pivotField2.Position = 1;
+        pivotField2.Name = "Name";
+
+        Excel.PivotField pivotField3 = (Excel.PivotField)pivotTable.PivotFields("Test Status");
+        pivotField3.Orientation = Excel.XlPivotFieldOrientation.xlRowField;
+        pivotField3.Name = "Status";
+
+        increment += 10;
+    }
+
+    book.Save();
+    book.Close(true);
+    app.Quit();
+}
