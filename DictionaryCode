@@ -1,0 +1,27 @@
+Range usedRange = xlWorksheet.Range["G2:G" + lastUsedRow.ToString()];
+            Range componentPathRange = xlWorksheet.Range["H2:H" + lastUsedRow.ToString()];
+            Dictionary<string, List<string>> keyValuePairs = new Dictionary<string, List<string>>();
+            int i = 1;
+
+            foreach (Range item in usedRange.Cells)
+            {
+                string cellValueStr = item.Value2;
+                List<string> ls = new List<string>();
+
+                if (cellValueStr != null && cellValueStr.Length > 0)
+                {
+                    cellValueStr = cellValueStr.Trim().Replace("\n", string.Empty);
+                    var value = ((object[,])componentPathRange.Cells.Value2)[i, 1].ToString();
+                    string[] values = value.Contains("\n") ? value.Trim().Split('\n') : new[] { value };
+                    ls.AddRange(values);
+                    if (keyValuePairs.ContainsKey(cellValueStr))
+                    {
+                        keyValuePairs[cellValueStr].AddRange(ls);
+                    }
+                    else
+                    {
+                        keyValuePairs.Add(cellValueStr, ls);
+                    }
+                }
+                i++;
+            }
